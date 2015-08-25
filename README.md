@@ -46,7 +46,7 @@ Your prompt should look something like this:
 Now change into the `www` directory:
 
 ```
-[vagrant@design www]$ cd /vagrant/www/
+[vagrant@design ~]$ cd /vagrant/www/
 ```
 
 List out the files in the directory. You should have something that looks very much like the following:
@@ -65,7 +65,7 @@ drwxr-xr-x. 1 vagrant vagrant  748 Aug 25 19:39 wp
 drwxr-xr-x. 1 vagrant vagrant  102 Aug 25 19:33 wp-content
 ```
 
-Change to the `wp` directory. And move the `wp-config.php` up a level to `www`. Then chance to the `www` directory.
+Change to the `wp` directory, and move the `wp-config.php` up a level to `www`. Then chance to the `www` directory.
 
 ```
 [vagrant@design www]$ cd wp/
@@ -104,7 +104,7 @@ define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
 ...
 ```
 
-Make sure you can access http://design.dev and log into http://design.dev/wp/wp-admin/.
+Make sure you can log into http://design.dev/wp/wp-admin/.
 
 Now for some fun! Delete the Wordpress installation:
 
