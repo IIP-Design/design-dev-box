@@ -1,0 +1,17 @@
+# OS Specific
+.DS_Store
+.Trash
+
+# Vagrant
+.vagrant
+
+
+# Wordpress
+www/wp
+www/wp-content/plugins
+www/wp-content/themes
+www/wp-content/uploads
+www/wp-config.php
+
+# Composer
+www/vendor

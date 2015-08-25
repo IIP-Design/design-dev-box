@@ -1,0 +1,32 @@
+{
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "wordpress",
+                "type": "webroot",
+                "version": "4.3",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/WordPress/WordPress/archive/4.3.zip"
+                },
+                "require" : {
+                    "fancyguy/webroot-installer": "1.1.0"
+                }
+            }
+        },
+        {
+            "type": "composer",
+            "url": "http://wpackagist.org"
+        }
+    ],
+    "require": {
+        "wordpress": "4.3",
+        "fancyguy/webroot-installer": "1.1.0",
+        "wpackagist-plugin/advanced-custom-fields": "4.4.3"
+    },
+    "extra": {
+        "webroot-dir": "wp",
+        "webroot-package": "wordpress"
+    }
+}
