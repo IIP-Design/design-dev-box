@@ -115,7 +115,7 @@ define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
 
 Make sure you can log into http://design.dev/wp/wp-admin/. You'll likely get a SSL warning:
 
-![Chrome SSL warning](https://github.com/USStateDept/design-dev-box/blob/master/sec-warning.jpg)
+![Chrome SSL warning](https://github.com/USStateDept/design-dev-box/blob/master/sec-warning.gif)
 
 Now for some fun! Delete the Wordpress installation:
 
