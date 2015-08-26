@@ -9,13 +9,15 @@ $ git clone git@github.com:USStateDept/design-dev-box.git design
 $ cd design/
 ```
 
-You should only change the following in the `site.yml` file:
+The default IP address might conflict if you have a lot of virtual machines or
+other entries in your `/etc/hosts` file. That said, you should only change the
+following in the `site.yml` file:
 
 ```yml
 #
 # Network Settings
 #
-ip: 192.168.33.100
+ip: 192.168.33.44
 
 #
 # WordPress User
@@ -85,8 +87,15 @@ drwxr-xr-x. 1 vagrant vagrant  714 Aug 25 19:46 wp
 drwxr-xr-x. 1 vagrant vagrant  102 Aug 25 19:33 wp-content
 ```
 
-Edit the `wp-config.php` file.
+You'll need to install either `nano`, `vim`, or another \*nix text editor:
 
+```
+[vagrant@design www]$ sudo yum install vim
+...
+
+```
+
+Edit the `wp-config.php` file:
 ```
 [vagrant@design www]$ vim wp-config.php
 ```
@@ -104,7 +113,9 @@ define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
 ...
 ```
 
-Make sure you can log into http://design.dev/wp/wp-admin/.
+Make sure you can log into http://design.dev/wp/wp-admin/. You'll likely get a SSL warning:
+
+![Chrome SSL warning](https://github.com/USStateDept/design-dev-box/blob/master/sec-warning.jpg)
 
 Now for some fun! Delete the Wordpress installation:
 
