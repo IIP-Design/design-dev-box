@@ -2,6 +2,30 @@
 
 Built on [VCCW](http://vccw.cc/).
 
+## Setup
+
+Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com/).
+
+Install the vagrant-hostsupdater plugin (recommended):
+
+```
+$ vagrant plugin install vagrant-hostsupdater
+```
+
+Windows doesn't allow the `vagrant-hostsupdater` plugin to change the `%SystemRoot%\System32\drivers\etc\hosts` file. You'll need to manually add an entry. For example:
+
+```
+...
+design.dev  192.168.33.44
+...
+```
+
+Download the Vagrant Box:
+
+```
+$ vagrant box add miya0001/vccw
+```
+
 Clone this repo and change into the directory:
 
 ```
@@ -9,22 +33,16 @@ $ git clone git@github.com:USStateDept/design-dev-box.git design
 $ cd design/
 ```
 
-The default IP address might conflict if you have a lot of virtual machines or
-other entries in your `/etc/hosts` file. That said, you should only change the
-following in the `site.yml` file:
+The default IP address in the `site.yml` file might conflict if you have a lot of virtual machines or
+other entries in your `/etc/hosts` file, so change it in `site.yml` if you have a confligt.
+**NOTE**: If you're using Windows, make sure the ip address you specified above
+matches the ip address in the `site.yml` file.
 
 ```yml
 #
 # Network Settings
 #
 ip: 192.168.33.44
-
-#
-# WordPress User
-#
-admin_user: admin
-admin_pass: admin
-admin_email: example@example.com
 ```
 
 Then start the vagrant box by running:
