@@ -62,7 +62,7 @@ plugins:
 # WordPress Default Theme
 # Theme's slug or url to the theme's .zip.
 #
-theme:
+theme: ''
 
 #
 # WordPress Options
