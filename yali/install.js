@@ -31,7 +31,7 @@ tasks = [
 	gotowww,
 	//checkoutLocalDevBranch,
 	//checkoutLocalStagingBranch,
-	checkoutMasterBranch,
+	//checkoutMasterBranch,
 	moveConfig,
 	deleteHtAccess,
 	gotoParentDir,
@@ -88,7 +88,7 @@ function cloneSite ( callback ) {
 }
 
 function gotowww( callback ) {
-	change directories
+	// change directories
 	process.chdir( 'www' );
 	callback();
 }
