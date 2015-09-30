@@ -10,7 +10,7 @@ var async = require('async'),
 var schema = {
 	properties: {
 		ip: {
-			description: 'The default ip is 192.168.33.41.  Hit enter to accept default or type new ip'
+			description: 'The default ip is 192.168.33.39.  Hit enter to accept default or type new ip'
 		}
 	}
 }
@@ -29,12 +29,12 @@ tasks = [
 	promptForInstructions,
 	cloneSite,
 	gotowww,
-	checkoutLocalDevBranch,
-	checkoutLocalStagingBranch,
+	//checkoutLocalDevBranch,
+	//checkoutLocalStagingBranch,
 	checkoutMasterBranch,
 	moveConfig,
 	deleteHtAccess,
-	gotoAmerica,
+	gotoParentDir,
 	promptForInput,
 	updateSiteYml,
 	promptToContinue,
@@ -79,43 +79,43 @@ function cloneDevBox ( callback ) {
 }
 
 function cloneSite ( callback ) {
-	msg('Cloning the america.gov repository');
+	msg('Cloning the Yali repository');
 	
 	// https://github.com/USStateDept/America.gov.git
-	git.clone( 'https://github.com/IIP-Design/America.gov.git', 'www', function( err ) {
+	git.clone( 'https://github.com/USStateDept/Yali', 'www', function( err ) {
 		callback();
 	});
 }
 
 function gotowww( callback ) {
-	// change directories
+	change directories
 	process.chdir( 'www' );
 	callback();
 }
 
-function checkoutLocalDevBranch ( callback ) {
-	msg('Checking out dev' );
-	git.checkoutLocalBranch( 'dev', function( err ) {
-		callback(); 
-	});
-}
+//function checkoutLocalDevBranch ( callback ) {
+	//msg('Checking out dev' );
+	//git.checkoutLocalBranch( 'dev', function( err ) {
+	//	callback(); 
+	//});
+//}
 
-function checkoutLocalStagingBranch ( callback ) {
-	msg('Checking out staging' );
-	git.checkoutLocalBranch( 'staging', function( err ) {
-		callback(); 
-	});
-}
+//function checkoutLocalStagingBranch ( callback ) {
+	//msg('Checking out staging' );
+	//git.checkoutLocalBranch( 'staging', function( err ) {
+		//callback(); 
+	//});
+//}
 
-function checkoutMasterBranch ( callback ) {
-	msg('Checking out master' );
-	git.checkout( 'master', function( err ) {
-		callback(); 
-	});
-}
+//function checkoutMasterBranch ( callback ) {
+	//msg('Checking out master' );
+	//git.checkout( 'master', function( err ) {
+	//	callback(); 
+//	});
+//}
 
 function moveConfig ( callback )  {
-	msg('Moving wp_config to america dir');
+	msg('Moving wp_config to yali dir');
 
 	// move wp-config.php
 	fse.move( 'wp-config.php', '../wp-config.php', function ( err ) {
@@ -131,7 +131,7 @@ function deleteHtAccess ( callback)  {
 	});
 }
 
-function gotoAmerica ( callback ) {
+function gotoParentDir ( callback ) {
 	msg( 'Going to america directory');
 	// change to america dir
 	process.chdir( '..' );
@@ -157,8 +157,8 @@ function promptForInput( callback ) {
 function updateSiteYml ( result, callback ) { 
 	msg ('Updating site.yml file with');
 	
-   	var host = 'america.dev', 
-   		ip = '192.168.33.41', 
+   	var host = 'yali.state.dev', 
+   		ip = '192.168.33.39', 
    		fileTpl, file, w, r;
 
    	if( result.hostname ) {

@@ -17,7 +17,7 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	activateGenesis,
+	//activateGenesis,
 	verifyGenesis,
 	createSalts,
 	copyEnvvar,
@@ -31,16 +31,9 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,
-	activateExtender,
-	enableBaseTheme,
-	// addDocsSite,
-	// addClimateSite,
-	// addFactsSite,
-	// addInteractiveSite,
-	// activateBaseThemeDocs,
-	// activateBaseThemeClimate,
-	// activateBaseThemeFacts,
-	// activateBaseThemeInteractive,
+	//enableBaseTheme,
+	// addYaliSite,
+	// activateBaseThemeYali,
 	promptForImport
 	// importDB
 ]
@@ -160,7 +153,7 @@ function editConfig1( callback ) {
 
 function promptToTest( callback ) {
 	prompt.start();
-	prompt.get(['Confirm that you can still connect to the DB by:\n 1. Go to http://america.dev to verify frontend loads\n 2. Confirm that you can login to http://america.dev/wp/wp-login.php.\n 3. If login successful, hit enter to continue..'], function() {
+	prompt.get(['Confirm that you can still connect to the DB by:\n 1. Go to http://yali.state.dev to verify frontend loads\n 2. Confirm that you can login to http://yali.state.dev/wp/wp-login.php.\n 3. If login successful, hit enter to continue..'], function() {
 		callback();
 	});
 }
@@ -208,7 +201,7 @@ function replaceHtAccess( callback ) {
 
 function promptToTest2( callback ) {
 	prompt.start();
-	prompt.get(['Make sure you can still access the http://america.dev, and that you can login: http://america.dev/wp/wp-admin/.\nHit Enter to continue...'], function() {
+	prompt.get(['Make sure you can still access the http://yali.state.dev, and that you can login: http://yali.state.dev/wp/wp-admin/.\nHit Enter to continue...'], function() {
 		callback();
 	});
 }
@@ -221,77 +214,24 @@ function editconfig4( callback ) {
 	});
 }
 
-function activateExtender( callback ) {
-	msg('Activating America Theme Extender...');
 
-	process.chdir( 'www/wp' );
+// function enableBaseTheme( callback ) {
+// 	msg('Network enabling America.gov Base Theme...');
 
-	child = exec('/usr/local/bin/wp plugin activate america-theme-extender --network', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme enable america --network', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function enableBaseTheme( callback ) {
-	msg('Network enabling America.gov Base Theme...');
+function addYaliSite( callback ) {
+	msg('Adding Yali site to the network...');
 
-	child = exec('/usr/local/bin/wp theme enable america --network', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function addDocsSite( callback ) {
-	msg('Adding docs site to the network...');
-
-	child = exec('/usr/local/bin/wp site create --slug=docs', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function addClimateSite( callback ) {
-	msg('Adding climate site to the network...');
-
-	child = exec('/usr/local/bin/wp site create --slug=climate', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function addFactsSite( callback ) {
-	msg('Adding facts site to the network...');
-
-	child = exec('/usr/local/bin/wp site create --slug=facts', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function addInteractiveSite( callback ) {
-	msg('Adding interactive site to the network...');
-
-	child = exec('/usr/local/bin/wp site create --slug=interactive', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp site create --slug=yali', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
@@ -302,94 +242,53 @@ function addInteractiveSite( callback ) {
 }
 
 
-function activateBaseThemeDocs( callback ) {
+// function activateBaseThemeYali( callback ) {
 	
-	msg('Activating america base theme for sites...');
+// 	msg('Activating america base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function activateBaseThemeClimate( callback ) {
-	
-	msg('Activating america base theme for sites...');
-	
-	child = exec('/usr/local/bin/wp theme activate america --url=climate.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function activateBaseThemeFacts( callback ) {
-	
-	msg('Activating america base theme for sites...');
-	
-	child = exec('/usr/local/bin/wp theme activate america --url=facts.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
-
-function activateBaseThemeInteractive( callback ) {
-	
-	msg('Activating america base theme for sites...');
-	
-	child = exec('/usr/local/bin/wp theme activate america --url=interactive.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
 
 function promptForImport( callback ) {
 	msg('');
 	prompt.start();
-	prompt.get(["Next, you will need to import the america.gov database.\n 1.Copy the  america.gov.sql script to the vagrant directory.\n 2. Run sh db.sh using 'wordpress' as the password'. Hit enter after the import to continue..."], function() {
+	prompt.get(["Next, you will need to import the yali.state.gov database.\n 1.Copy the  yali.state.gov.sql script to the vagrant directory.\n 2. Run sh db.sh using 'wordpress' as the password'. Hit enter after the import to continue..."], function() {
 		callback();
 	})
 }
 
-function importDB( callback ) {
-	process.chdir( '/vagrant' );
+// function importDB( callback ) {
+// 	process.chdir( '/vagrant' );
 
-	var gunzip = zlib.createGunzip();
+// 	var gunzip = zlib.createGunzip();
 
-	r = fse.createReadStream('america.gov.sql.gz');
-	w = fse.createWriteStream( 'america.gov.sql' );
+// 	r = fse.createReadStream('america.gov.sql.gz');
+// 	w = fse.createWriteStream( 'america.gov.sql' );
 
-	// uncompresses
-	r.pipe( gunzip )  
-	 .pipe( w );  
+// 	// uncompresses
+// 	r.pipe( gunzip )  
+// 	 .pipe( w );  
 
-	 // may need to drop wordpress db and recreate it before importing dump		
+// 	 // may need to drop wordpress db and recreate it before importing dump		
 	
-	// import
-	child = exec('mysql -u wordpress -p  wordpress < america.gov.sql', function ( err, stdout, stderr ) {
-		//msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	// import
+// 	child = exec('mysql -u wordpress -p  wordpress < america.gov.sql', function ( err, stdout, stderr ) {
+// 		//msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
 
 

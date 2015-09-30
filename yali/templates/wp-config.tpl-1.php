@@ -33,8 +33,8 @@ define('NONCE_SALT',       '&j%t|3t+B#5wv-O%qfj2)=?a!M8fse$+mq8FKyrSLFX9~Acgb-GL
 $table_prefix = 'wp_';
 
 
-define( 'WP_HOME', 'http://america.dev' );
-define( 'WP_SITEURL', 'http://america.dev/wp' );
+define( 'WP_HOME', 'http://yali.state.dev' );
+define( 'WP_SITEURL', 'http://yali.state.dev/wp' );
 define( 'JETPACK_DEV_DEBUG', true );
 define( 'WP_DEBUG', true );
 define( 'FORCE_SSL_ADMIN', true );
