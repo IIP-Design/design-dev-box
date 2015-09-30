@@ -17,3 +17,5 @@ www/vendor
 
 # VCCW
 www/.gitignore
+yseali/node_modules
+yali/node_modules
