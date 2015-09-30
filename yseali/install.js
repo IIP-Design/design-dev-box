@@ -10,7 +10,7 @@ var async = require('async'),
 var schema = {
 	properties: {
 		ip: {
-			description: 'The default ip is 192.168.33.41.  Hit enter to accept default or type new ip'
+			description: 'The default ip is 192.168.33.34.  Hit enter to accept default or type new ip'
 		}
 	}
 }
@@ -29,12 +29,12 @@ tasks = [
 	promptForInstructions,
 	cloneSite,
 	gotowww,
-	checkoutLocalDevBranch,
-	checkoutLocalStagingBranch,
-	checkoutMasterBranch,
+	//checkoutLocalDevBranch,
+	//checkoutLocalStagingBranch, 
+	//checkoutMasterBranch, 
 	moveConfig,
 	deleteHtAccess,
-	gotoAmerica,
+	gotoParentDir,
 	promptForInput,
 	updateSiteYml,
 	promptToContinue,
@@ -79,10 +79,10 @@ function cloneDevBox ( callback ) {
 }
 
 function cloneSite ( callback ) {
-	msg('Cloning the america.gov repository');
+	msg('Cloning the yseali repository');
 	
 	// https://github.com/USStateDept/America.gov.git
-	git.clone( 'https://github.com/IIP-Design/America.gov.git', 'www', function( err ) {
+	git.clone( 'https://github.com/USStateDept/Yseali.git', 'www', function( err ) {
 		callback();
 	});
 }
@@ -93,7 +93,7 @@ function gotowww( callback ) {
 	callback();
 }
 
-function checkoutLocalDevBranch ( callback ) {
+/*function checkoutLocalDevBranch ( callback ) {
 	msg('Checking out dev' );
 	git.checkoutLocalBranch( 'dev', function( err ) {
 		callback(); 
@@ -112,10 +112,10 @@ function checkoutMasterBranch ( callback ) {
 	git.checkout( 'master', function( err ) {
 		callback(); 
 	});
-}
+} */
 
 function moveConfig ( callback )  {
-	msg('Moving wp_config to america dir');
+	msg('Moving wp_config to yseali dir');
 
 	// move wp-config.php
 	fse.move( 'wp-config.php', '../wp-config.php', function ( err ) {
@@ -131,9 +131,9 @@ function deleteHtAccess ( callback)  {
 	});
 }
 
-function gotoAmerica ( callback ) {
-	msg( 'Going to america directory');
-	// change to america dir
+function gotoParentDir ( callback ) {
+	msg( 'Going to parent directory');
+	// change to parent dir
 	process.chdir( '..' );
 	callback();
 }
@@ -157,8 +157,8 @@ function promptForInput( callback ) {
 function updateSiteYml ( result, callback ) { 
 	msg ('Updating site.yml file with');
 	
-   	var host = 'america.dev', 
-   		ip = '192.168.33.41', 
+   	var host = 'yseali.state.dev', 
+   		ip = '192.168.33.34', 
    		fileTpl, file, w, r;
 
    	if( result.hostname ) {

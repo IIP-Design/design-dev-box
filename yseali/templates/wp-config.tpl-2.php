@@ -62,12 +62,7 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
 $table_prefix  = 'wp_';
 
 
-// AWS site
-if (getenv('AWS_ENV') == 'STARBUCK') {
-    define('AWS_ENV', 'STARBUCK');
-} else {
-    define('AWS_ENV', 'other');
-}
+
 
 /**
  * For developers: WordPress debugging mode.

@@ -62,12 +62,7 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
 $table_prefix  = 'wp_';
 
 
-// AWS site
-if (getenv('AWS_ENV') == 'STARBUCK') {
-    define('AWS_ENV', 'STARBUCK');
-} else {
-    define('AWS_ENV', 'other');
-}
+
 
 /**
  * For developers: WordPress debugging mode.
@@ -111,7 +106,7 @@ define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 
-define('WP_DEFAULT_THEME', 'genesis');
+//define('WP_DEFAULT_THEME', 'genesis');
 
 // define('SUNRISE', 'on'); // wordpress-mu-domain-mapping activation*/
 
