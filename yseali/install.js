@@ -157,7 +157,7 @@ function promptForInput( callback ) {
 function updateSiteYml ( result, callback ) { 
 	msg ('Updating site.yml file with');
 	
-   	var host = 'yseali.state.dev', 
+   	var host = 'state.dev', 
    		ip = '192.168.33.34', 
    		fileTpl, file, w, r;
 
