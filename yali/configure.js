@@ -31,10 +31,10 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,
-	//enableBaseTheme,
-	// addYaliSite,
-	// activateBaseThemeYali,
-	promptForImport
+	enableBaseTheme,
+	addYaliSite,
+	activateThemeForYali
+	//promptForImport
 	// importDB
 ]
 
@@ -215,18 +215,18 @@ function editconfig4( callback ) {
 }
 
 
-// function enableBaseTheme( callback ) {
-// 	msg('Network enabling America.gov Base Theme...');
+function enableBaseTheme( callback ) {
+	msg('Network enabling Moxie Theme...');
 
-// 	child = exec('/usr/local/bin/wp theme enable america --network', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
+	child = exec('/usr/local/bin/wp theme enable yali-moxie-theme --network', function ( err, stdout, stderr ) {
+		msg( 'stdout: ' + stdout );
+	    msg( 'stderr: ' + stderr );
+		if( err ) {
+		 	msg( err.code );
+		}
+		callback();
+	});
+}
 
 function addYaliSite( callback ) {
 	msg('Adding Yali site to the network...');
@@ -242,19 +242,19 @@ function addYaliSite( callback ) {
 }
 
 
-// function activateBaseThemeYali( callback ) {
+function activateThemeForYali( callback ) {
 	
-// 	msg('Activating america base theme for sites...');
+	msg('Activating theme for yali site...');
 	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
+	child = exec('/usr/local/bin/wp theme activate yali-moxie-child-theme --url=yali.state.dev', function ( err, stdout, stderr ) {
+		msg( 'stdout: ' + stdout );
+	    msg( 'stderr: ' + stderr );
+		if( err ) {
+		 	msg( err.code );
+		}
+		callback();
+	});
+}
 
 
 function promptForImport( callback ) {
