@@ -17,8 +17,8 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	//activateGenesis,
-	verifyGenesis,
+	activateMoxie,
+	verifyMoxie,
 	createSalts,
 	copyEnvvar,
 	apacheRestart,
@@ -31,7 +31,7 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,
-	//enableBaseTheme,
+	networkEnableMoxieTheme,
 	// addYsealiSite,
 	// activateBaseThemeYseali,
 	
@@ -57,12 +57,12 @@ function verifyConnection( callback ) {
 	callback();
 }
 
-function activateGenesis ( callback ) {
-	msg( 'Activating  genesis...' );
+function activateMoxie ( callback ) {
+	msg( 'Activating  moxie...' );
 
 	process.chdir( 'www/wp' );
 
-	child = exec('/usr/local/bin/wp theme activate Genesis', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate Moxie', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
@@ -72,11 +72,11 @@ function activateGenesis ( callback ) {
 	});
 }
 
-function verifyGenesis( callback ) {
-	msg( 'Verifying Genesis activations...' );
+function verifyMoxie( callback ) {
+	msg( 'Verifying Moxie activations...' );
 	msg('');
 	prompt.start();
-	prompt.get(['Complete the following:\n1. Login to site at  http://america.dev/wp/wp-admin/\n2. Update database as prompted.\n3. Hit continue and login with username: admin and password: admin.\n4. Visit frontend and ensure all is working.\n5. Hit enter to continue...'], function() {
+	prompt.get(['Complete the following:\n1. Login to site at  http://state.dev/wp/wp-admin/\n2. Update database as prompted.\n3. Hit continue and login with username: admin and password: admin.\n4. Visit frontend and ensure all is working.\n5. Hit enter to continue...'], function() {
 		callback();
 	})
 }
@@ -185,6 +185,8 @@ function convertToMultisite ( callback ) {
 function editConfig3( callback ) {
 	msg('Completing multisite installation...');
 	
+	process.chdir( '/vagrant' );
+
 	fse.move( 'templates/wp-config.tpl-4.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
@@ -193,7 +195,7 @@ function editConfig3( callback ) {
 function replaceHtAccess( callback ) {
 	msg('Moving .htaccess file...');
 	
-	process.chdir( '/vagrant' );
+	//process.chdir( '/vagrant' );
 
 	fse.copy( 'templates/.htaccess', 'www/.htaccess', function ( err ) {
   		callback();
@@ -215,10 +217,10 @@ function editconfig4( callback ) {
 	});
 }
 
+function networkEnableMoxieTheme( callback ) {
+	msg('Network enabling Moxie Theme...');
 
-
-/*function enableBaseTheme( callback ) {
-	msg('Network enabling America.gov Base Theme...');
+	process.chdir( 'www/wp' );
 
 	child = exec('/usr/local/bin/wp theme enable america --network', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
@@ -228,7 +230,7 @@ function editconfig4( callback ) {
 		}
 		callback();
 	});
-}*/
+}
 
 function addYsealiSite( callback ) {
 	msg('Adding Yseali site to the network...');

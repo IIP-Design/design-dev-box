@@ -53,7 +53,7 @@ async.waterfall( tasks, function ( err, result ) {
     msg("Follow the follow steps:\n1. Type 'vagrant ssh\n2. After login, type 'cd \/vagrant'\n3. Type 'sh configure.sh\n4. Hit enter'");
   });
 
-// debug utitlity
+// debug utility
 function whereAmI() {
 	 msg( 'In directory ' + process.cwd() ); 
 }
@@ -122,8 +122,8 @@ function deleteHtAccess ( callback)  {
 }
 
 function gotoParentDir ( callback ) {
-	msg( 'Going to america directory');
-	// change to america dir
+	msg( 'Going to parent directory');
+	// change to parent dir
 	process.chdir( '..' );
 	callback();
 }
@@ -187,7 +187,7 @@ function updateSiteYml ( result, callback ) {
 
 function promptToContinue( callback ) {
 	prompt.start();
-	prompt.get(['Provisioning vagrant, this make take a few minutes. Hit enter to continue...'], function() {
+	prompt.get(['Provisioning vagrant, this may take a few minutes. Hit enter to continue...'], function() {
 		callback();
 	});
 }

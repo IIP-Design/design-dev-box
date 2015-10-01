@@ -25,7 +25,6 @@ function msg( msg ) {
 msg('Development enviroment setup start...');
 
 tasks = [
-	// cloneDevBox, skip this step, putting this script in devbox repo
 	promptForInstructions,
 	cloneSite,
 	gotowww,
@@ -54,7 +53,7 @@ async.waterfall( tasks, function ( err, result ) {
     msg("Follow the follow steps:\n1. Type 'vagrant ssh\n2. After login, type 'cd \/vagrant'\n3. Type 'sh configure.sh\n4. Hit enter'");
   });
 
-// debug utitlity
+// debug utility
 function whereAmI() {
 	 msg( 'In directory ' + process.cwd() ); 
 }
@@ -63,20 +62,11 @@ function promptForInstructions( callback ) {
 	msg('');
 	msg('');
 	prompt.start();
-	prompt.get(['This install will create an america.dev domain on your local machine.\nIf an america.dev domain already exists, then this will create a conflict\nRemove or rename it before continuing.\nHit enter when you are ready to continue....'], function() {
+	prompt.get(['This install will create an state.dev domain on your local machine.\nIf an america.dev domain already exists, then this will create a conflict\nRemove or rename it before continuing.\nHit enter when you are ready to continue....'], function() {
 		callback();
 	})
 }
-	 
-// delete america if present
-function cloneDevBox ( callback ) {
-	msg('Cloning the development box repository');
 
-	git.clone( 'https://github.com/USStateDept/America.gov-Dev-Box.git', 'america', function( err ) {
-		if ( err ) return callback( err, result );
-		callback();
-	});
-}
 
 function cloneSite ( callback ) {
 	msg('Cloning the yseali repository');
@@ -197,7 +187,7 @@ function updateSiteYml ( result, callback ) {
 
 function promptToContinue( callback ) {
 	prompt.start();
-	prompt.get(['Provisioning vagrant, this make take a few minutes. Hit enter to continue...'], function() {
+	prompt.get(['Provisioning vagrant, this may take a few minutes. Hit enter to continue...'], function() {
 		callback();
 	});
 }
