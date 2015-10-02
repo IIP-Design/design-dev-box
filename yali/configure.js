@@ -31,9 +31,9 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,
-	networkEnableMoxieTheme,
+	networkEnableYaliTheme,
 	addYaliSite,
-	activateThemeForYali
+	activateYaliThemeForSite
 	//promptForImport
 	// importDB
 ]
@@ -217,12 +217,12 @@ function editconfig4( callback ) {
 }
 
 
-function networkEnableMoxieTheme( callback ) {
+function networkEnableYaliTheme( callback ) {
 	msg('Network enabling Moxie Theme...');
 	
 	process.chdir( 'www/wp' );
 	
-	child = exec('/usr/local/bin/wp theme enable yali-moxie-theme --network', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme enable moxie-yali  --network', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
@@ -246,7 +246,7 @@ function addYaliSite( callback ) {
 }
 
 
-function activateThemeForYali( callback ) {
+function activateYaliThemeForSite( callback ) {
 	
 	msg('Activating theme for yali site...');
 	
