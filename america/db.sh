@@ -1,1 +1,1 @@
-sudo mysql -u wordpress -p wordpress < america.gov.sql
+sudo mysql -u root -p wordpress < america.gov.sql

@@ -381,7 +381,7 @@ function importDB( callback ) {
 	 // may need to drop wordpress db and recreate it before importing dump		
 	
 	// import
-	child = exec('mysql -u wordpress -p  wordpress < america.gov.sql', function ( err, stdout, stderr ) {
+	child = exec('mysql -u root -p  wordpress < america.gov.sql', function ( err, stdout, stderr ) {
 		//msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {

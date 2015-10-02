@@ -5,17 +5,23 @@
 # Vagrant
 .vagrant
 
-# Wordpress
-www/wp
-www/wp-content/plugins
-www/wp-content/themes
-www/wp-content/uploads
-www/wp-config.php
-
 # Composer
 www/vendor
 
 # VCCW
 www/.gitignore
+
+node_modules
+america/node_modules
 yali/node_modules
 yseali/node_modules
+
+america/www
+yali/www
+yseali/
+
+america/wp-config.php
+yali/wp-config.php
+yseali/wp-config.
+
+*.sql
