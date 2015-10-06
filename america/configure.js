@@ -41,7 +41,7 @@ tasks = [
 	// activateBaseThemeClimate,
 	// activateBaseThemeFacts,
 	// activateBaseThemeInteractive,
-	promptForImport
+	// promptForImport
 	// importDB
 ]
 
@@ -51,7 +51,8 @@ async.waterfall( tasks, function ( err, result ) {
     	
     	msg( 'Uh oh, something went wrong...  ');
     }
-    msg("-------  Process complete -----------\nYou should now have a basic development environment.\nVerify successful install by visiting the frontend http://america.dev\nand attempting to login in at  http://america.dev/wp/wp-admin/ using user:admin, password: admin");
+    //msg("-------  Process complete -----------\nYou should now have a basic development environment.\nVerify successful install by visiting the frontend http://america.dev\nand attempting to login in at  http://america.dev/wp/wp-admin/ using user:admin, password: admin");
+    msg("Import the db and upload the theme settings to complete the install");
 });
 
 function whereAmI() {
@@ -92,8 +93,8 @@ function createSalts( callback ) {
 
 	process.chdir( '/vagrant' );
 
-	fileTpl = 'templates/envvar.tpl.conf';   	
-	file = 	'templates/envvar.conf';				
+	var fileTpl = 'templates/envvar.tpl.conf';   	
+	var file = 	'templates/envvar.conf';				
 
 	w = fse.createWriteStream( file );
 	r = fse.createReadStream( fileTpl );
@@ -115,7 +116,7 @@ function createSalts( callback ) {
 function copyEnvvar( callback ) {
 	msg('Moving envvar.conf file...');
 
-	fse.move( 'templates/envvar.conf', '/etc/httpd/envvar.conf', function ( err ) {
+	fse.move( 'templates/envvar.conf', '/etc/httpd/conf.d/envvar.conf', function ( err ) {
   		msg('moved')
   		callback();
 	});
@@ -123,6 +124,8 @@ function copyEnvvar( callback ) {
 
 function apacheRestart( callback ) {
 	msg( 'Restating apache... ' ); 
+
+	process.chdir( '/etc/httpd/conf.d' );
 
 	child = spawn('apachectl', ['restart']);
 
@@ -144,6 +147,8 @@ function apacheRestart( callback ) {
 
 function moveConfig( callback ) {
 	msg('Moving wp-config.php to www folder');
+
+	process.chdir( '/vagrant' );
 	
 	fse.move( 'wp-config.php', 'www/wp-config.php', function ( err ) {
   		callback();
@@ -190,6 +195,8 @@ function convertToMultisite ( callback ) {
 
 function editConfig3( callback ) {
 	msg('Completing multisite installation...');
+
+	process.chdir( '/vagrant' );
 	
 	fse.move( 'templates/wp-config.tpl-4.php', 'www/wp-config.php', function ( err ) {
   		callback();
@@ -198,8 +205,6 @@ function editConfig3( callback ) {
 
 function replaceHtAccess( callback ) {
 	msg('Moving .htaccess file...');
-	
-	process.chdir( '/vagrant' );
 
 	fse.copy( 'templates/.htaccess', 'www/.htaccess', function ( err ) {
   		callback();
@@ -249,114 +254,114 @@ function enableBaseTheme( callback ) {
 	});
 }
 
-function addDocsSite( callback ) {
-	msg('Adding docs site to the network...');
+// function addDocsSite( callback ) {
+// 	msg('Adding docs site to the network...');
 
-	child = exec('/usr/local/bin/wp site create --slug=docs', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp site create --slug=docs', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function addClimateSite( callback ) {
-	msg('Adding climate site to the network...');
+// function addClimateSite( callback ) {
+// 	msg('Adding climate site to the network...');
 
-	child = exec('/usr/local/bin/wp site create --slug=climate', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp site create --slug=climate', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function addFactsSite( callback ) {
-	msg('Adding facts site to the network...');
+// function addFactsSite( callback ) {
+// 	msg('Adding facts site to the network...');
 
-	child = exec('/usr/local/bin/wp site create --slug=facts', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp site create --slug=facts', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function addInteractiveSite( callback ) {
-	msg('Adding interactive site to the network...');
+// function addInteractiveSite( callback ) {
+// 	msg('Adding interactive site to the network...');
 
-	child = exec('/usr/local/bin/wp site create --slug=interactive', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp site create --slug=interactive', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
 
-function activateBaseThemeDocs( callback ) {
+// function activateBaseThemeDocs( callback ) {
 	
-	msg('Activating america base theme for sites...');
+// 	msg('Activating america base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function activateBaseThemeClimate( callback ) {
+// function activateBaseThemeClimate( callback ) {
 	
-	msg('Activating america base theme for sites...');
+// 	msg('Activating america base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=climate.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme activate america --url=climate.america.dev', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function activateBaseThemeFacts( callback ) {
+// function activateBaseThemeFacts( callback ) {
 	
-	msg('Activating america base theme for sites...');
+// 	msg('Activating america base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=facts.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme activate america --url=facts.america.dev', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
-function activateBaseThemeInteractive( callback ) {
+// function activateBaseThemeInteractive( callback ) {
 	
-	msg('Activating america base theme for sites...');
+// 	msg('Activating america base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=interactive.america.dev', function ( err, stdout, stderr ) {
-		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
-		if( err ) {
-		 	msg( err.code );
-		}
-		callback();
-	});
-}
+// 	child = exec('/usr/local/bin/wp theme activate america --url=interactive.america.dev', function ( err, stdout, stderr ) {
+// 		msg( 'stdout: ' + stdout );
+// 	    msg( 'stderr: ' + stderr );
+// 		if( err ) {
+// 		 	msg( err.code );
+// 		}
+// 		callback();
+// 	});
+// }
 
 function promptForImport( callback ) {
 	msg('');

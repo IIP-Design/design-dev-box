@@ -89,7 +89,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PRO
     define('WP_CONTENT_URL', 'https://' . $_SERVER['SERVER_NAME'] . '/wp-content');
     define('WP_SITEURL', 'https://' . $_SERVER['SERVER_NAME'] . '/');
     define('WP_HOME', 'https://' . $_SERVER['SERVER_NAME']);
-        $_SERVER['HTTPS']='on';
+    $_SERVER['HTTPS']='on';
 } else {
     define('WP_CONTENT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/wp-content');
     define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] . '/');
