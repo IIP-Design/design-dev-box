@@ -33,17 +33,16 @@ tasks = [
 	editconfig4,
 	activateExtender,
 	enableBaseTheme,
-	// addDocsSite,
-	// addClimateSite,
-	// addFactsSite,
-	// addInteractiveSite,
-	// activateBaseThemeDocs,
-	// activateBaseThemeClimate,
-	// activateBaseThemeFacts,
-	// activateBaseThemeInteractive,
-	// promptForImport
+	promptForImport
 	// importDB
 ]
+
+/*
+
+add admin user to each site
+import theme settings
+conf
+ */
 
 // Runs on load
 async.waterfall( tasks, function ( err, result ) {
@@ -51,8 +50,7 @@ async.waterfall( tasks, function ( err, result ) {
     	
     	msg( 'Uh oh, something went wrong...  ');
     }
-    //msg("-------  Process complete -----------\nYou should now have a basic development environment.\nVerify successful install by visiting the frontend http://america.dev\nand attempting to login in at  http://america.dev/wp/wp-admin/ using user:admin, password: admin");
-    msg("Import the db and upload the theme settings to complete the install");
+    msg("The installation is complete. Log into https://climate.america.dev/wp-admin/ and complete configuration by:\n 1. Add the 'admin'  user to each site (Network Admin -> Sites -> [site name] -> Edit -> Users)\n  2. Import the theme settings for each site (Site -> Genesis -> Import/Export\n 3. Manually update site by comparing against the live site and making any needed adjustments in WordPress dashboard.");
 });
 
 function whereAmI() {
@@ -128,8 +126,6 @@ function apacheRestart( callback ) {
 	process.chdir( '/etc/httpd/conf.d' );
 
 	child = spawn('apachectl', ['restart']);
-
-    msg('Restarting apache');
 
     child.stdout.on('data', function (data) {
 	  msg('stdout: ' + data);
@@ -254,119 +250,10 @@ function enableBaseTheme( callback ) {
 	});
 }
 
-// function addDocsSite( callback ) {
-// 	msg('Adding docs site to the network...');
-
-// 	child = exec('/usr/local/bin/wp site create --slug=docs', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function addClimateSite( callback ) {
-// 	msg('Adding climate site to the network...');
-
-// 	child = exec('/usr/local/bin/wp site create --slug=climate', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function addFactsSite( callback ) {
-// 	msg('Adding facts site to the network...');
-
-// 	child = exec('/usr/local/bin/wp site create --slug=facts', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function addInteractiveSite( callback ) {
-// 	msg('Adding interactive site to the network...');
-
-// 	child = exec('/usr/local/bin/wp site create --slug=interactive', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-
-// function activateBaseThemeDocs( callback ) {
-	
-// 	msg('Activating america base theme for sites...');
-	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=docs.america.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function activateBaseThemeClimate( callback ) {
-	
-// 	msg('Activating america base theme for sites...');
-	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=climate.america.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function activateBaseThemeFacts( callback ) {
-	
-// 	msg('Activating america base theme for sites...');
-	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=facts.america.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-// function activateBaseThemeInteractive( callback ) {
-	
-// 	msg('Activating america base theme for sites...');
-	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=interactive.america.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
 function promptForImport( callback ) {
 	msg('');
 	prompt.start();
-	prompt.get(["Next, you will need to import the america.gov database.\n 1.Copy the  america.gov.sql script to the vagrant directory.\n 2. Run sh db.sh using 'wordpress' as the password'. Hit enter after the import to continue..."], function() {
+	prompt.get(["Next, you will need to import the america.gov database.\n 1.Copy the  america.gov.sql script to the vagrant directory.\n 2. Log into the mysql db 'mysql -u root -p' using 'wordpress' as the password'.\n 3. Type 'use wordpress'\n 4. Type source america.gov.sql\n 5. Type 'quit' to exit mysql\n 6.  Hit enter to complete the installation"], function() {
 		callback();
 	})
 }

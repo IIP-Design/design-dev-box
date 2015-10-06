@@ -1,1 +1,0 @@
-sudo mysql -u root -p wordpress < america.gov.sql
