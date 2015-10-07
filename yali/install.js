@@ -28,9 +28,6 @@ tasks = [
 	promptForInstructions,
 	cloneSite,
 	gotowww,
-	//checkoutLocalDevBranch,
-	//checkoutLocalStagingBranch,
-	//checkoutMasterBranch,
 	moveConfig,
 	deleteHtAccess,
 	gotoParentDir,
@@ -82,27 +79,6 @@ function gotowww( callback ) {
 	process.chdir( 'www' );
 	callback();
 }
-
-//function checkoutLocalDevBranch ( callback ) {
-	//msg('Checking out dev' );
-	//git.checkoutLocalBranch( 'dev', function( err ) {
-	//	callback(); 
-	//});
-//}
-
-//function checkoutLocalStagingBranch ( callback ) {
-	//msg('Checking out staging' );
-	//git.checkoutLocalBranch( 'staging', function( err ) {
-		//callback(); 
-	//});
-//}
-
-//function checkoutMasterBranch ( callback ) {
-	//msg('Checking out master' );
-	//git.checkout( 'master', function( err ) {
-	//	callback(); 
-//	});
-//}
 
 function moveConfig ( callback )  {
 	msg('Moving wp_config to yali dir');
@@ -158,8 +134,8 @@ function updateSiteYml ( result, callback ) {
    		 ip = result.ip;
    	} 
 
-	fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
-	file = 'site.yml';						// and writing to site.yml
+	var fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
+	var file = 'site.yml';						// and writing to site.yml
 
 	w = fse.createWriteStream( file );
 	r = fse.createReadStream( fileTpl );

@@ -61,9 +61,6 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
  */
 $table_prefix  = 'wp_';
 
-
-
-
 /**
  * For developers: WordPress debugging mode.
  *

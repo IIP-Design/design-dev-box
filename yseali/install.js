@@ -28,9 +28,6 @@ tasks = [
 	promptForInstructions,
 	cloneSite,
 	gotowww,
-	//checkoutLocalDevBranch,
-	//checkoutLocalStagingBranch, 
-	//checkoutMasterBranch, 
 	moveConfig,
 	deleteHtAccess,
 	gotoParentDir,
@@ -62,7 +59,7 @@ function promptForInstructions( callback ) {
 	msg('');
 	msg('');
 	prompt.start();
-	prompt.get(['This install will create an state.dev domain on your local machine.\nIf an america.dev domain already exists, then this will create a conflict\nRemove or rename it before continuing.\nHit enter when you are ready to continue....'], function() {
+	prompt.get(['This install will create an iip.dev domain on your local machine.\nIf an iip.dev domain already exists, then this will create a conflict\nRemove or rename it before continuing.\nHit enter when you are ready to continue....'], function() {
 		callback();
 	})
 }
@@ -83,26 +80,6 @@ function gotowww( callback ) {
 	callback();
 }
 
-/*function checkoutLocalDevBranch ( callback ) {
-	msg('Checking out dev' );
-	git.checkoutLocalBranch( 'dev', function( err ) {
-		callback(); 
-	});
-}
-
-function checkoutLocalStagingBranch ( callback ) {
-	msg('Checking out staging' );
-	git.checkoutLocalBranch( 'staging', function( err ) {
-		callback(); 
-	});
-}
-
-function checkoutMasterBranch ( callback ) {
-	msg('Checking out master' );
-	git.checkout( 'master', function( err ) {
-		callback(); 
-	});
-} */
 
 function moveConfig ( callback )  {
 	msg('Moving wp_config to yseali dir');
@@ -147,7 +124,7 @@ function promptForInput( callback ) {
 function updateSiteYml ( result, callback ) { 
 	msg ('Updating site.yml file with');
 	
-   	var host = 'state.dev', 
+   	var host = 'iip.dev', 
    		ip = '192.168.33.34', 
    		fileTpl, file, w, r;
 
@@ -158,8 +135,8 @@ function updateSiteYml ( result, callback ) {
    		 ip = result.ip;
    	} 
 
-	fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
-	file = 'site.yml';						// and writing to site.yml
+	var fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
+	var file = 'site.yml';						// and writing to site.yml
 
 	w = fse.createWriteStream( file );
 	r = fse.createReadStream( fileTpl );

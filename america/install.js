@@ -162,14 +162,14 @@ function updateSiteYml ( result, callback ) {
    		fileTpl, file, w, r;
 
    	if( result.hostname ) {
-   		 host = result.hostname;
+   		host = result.hostname;
    	} 
    	if( result.ip ) {
-   		 ip = result.ip;
+   		ip = result.ip;
    	} 
 
-	fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
-	file = 'site.yml';						// and writing to site.yml
+	var fileTpl = 'templates/site.tpl.yml';   	// will be reading from site.tpl.yml
+	var file = 'site.yml';						// and writing to site.yml
 
 	w = fse.createWriteStream( file );
 	r = fse.createReadStream( fileTpl );

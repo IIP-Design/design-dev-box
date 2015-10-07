@@ -62,8 +62,6 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
 $table_prefix  = 'wp_';
 
 
-
-
 /**
  * For developers: WordPress debugging mode.
  *
@@ -108,7 +106,7 @@ define('BLOG_ID_CURRENT_SITE', 1);
 
 //define('WP_DEFAULT_THEME', 'genesis');
 
-define('SUNRISE', 'on'); // wordpress-mu-domain-mapping activation*/
+//define('SUNRISE', 'on'); // wordpress-mu-domain-mapping activation*/
 
 
 /* That's all, stop editing! Happy blogging. */

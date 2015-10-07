@@ -30,13 +30,11 @@ tasks = [
 	editConfig3,
 	replaceHtAccess,
 	promptToTest2,
-	editconfig4,
-	networkEnableMoxieTheme,
+	// editconfig4,
+	// networkEnableMoxieTheme,
 	// addYsealiSite,
 	// activateBaseThemeYseali,
-	
-	promptForImport
-	// importDB
+	// promptForImport
 ]
 
 // Runs on load
@@ -86,8 +84,8 @@ function createSalts( callback ) {
 
 	process.chdir( '/vagrant' );
 
-	fileTpl = 'templates/envvar.tpl.conf';   	
-	file = 	'templates/envvar.conf';				
+	var fileTpl = 'templates/envvar.tpl.conf';   	
+	var file = 	'templates/envvar.conf';				
 
 	w = fse.createWriteStream( file );
 	r = fse.createReadStream( fileTpl );
@@ -109,7 +107,7 @@ function createSalts( callback ) {
 function copyEnvvar( callback ) {
 	msg('Moving envvar.conf file...');
 
-	fse.move( 'templates/envvar.conf', '/etc/httpd/envvar.conf', function ( err ) {
+	fse.move( 'templates/envvar.conf', '/etc/httpd/conf.d/envvar.conf', function ( err ) {
   		msg('moved')
   		callback();
 	});
@@ -118,9 +116,9 @@ function copyEnvvar( callback ) {
 function apacheRestart( callback ) {
 	msg( 'Restating apache... ' ); 
 
-	child = spawn('apachectl', ['restart']);
+	process.chdir( '/etc/httpd/conf.d' );
 
-    msg('Restarting apache');
+	child = spawn('apachectl', ['restart']);
 
     child.stdout.on('data', function (data) {
 	  msg('stdout: ' + data);
@@ -138,6 +136,8 @@ function apacheRestart( callback ) {
 
 function moveConfig( callback ) {
 	msg('Moving wp-config.php to www folder');
+
+	process.chdir( '/vagrant' );
 	
 	fse.move( 'wp-config.php', 'www/wp-config.php', function ( err ) {
   		callback();
@@ -146,7 +146,7 @@ function moveConfig( callback ) {
 
 function editConfig1( callback ) {
 	msg('Editing config...');
-	
+
 	fse.move( 'templates/wp-config.tpl-2.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
@@ -162,7 +162,7 @@ function promptToTest( callback ) {
 function editConfig2( callback ) {
 	msg('Allowing multisite...');
 	
-	fse.move( 'templates/wp-config.tpl-3.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'templates/wp-config.tpl-3.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -194,8 +194,6 @@ function editConfig3( callback ) {
 
 function replaceHtAccess( callback ) {
 	msg('Moving .htaccess file...');
-	
-	//process.chdir( '/vagrant' );
 
 	fse.copy( 'templates/.htaccess', 'www/.htaccess', function ( err ) {
   		callback();
@@ -246,23 +244,19 @@ function addYsealiSite( callback ) {
 }
 
 
-
-
-// function activateBaseThemeYseali( callback ) {
+function activateBaseThemeYseali( callback ) {
 	
-// 	msg('Activating yseali base theme for sites...');
+	msg('Activating yseali base theme for sites...');
 	
-// 	child = exec('/usr/local/bin/wp theme activate america --url=yseali.state.dev', function ( err, stdout, stderr ) {
-// 		msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
-
-
+	child = exec('/usr/local/bin/wp theme activate america --url=yseali.state.dev', function ( err, stdout, stderr ) {
+		msg( 'stdout: ' + stdout );
+	    msg( 'stderr: ' + stderr );
+		if( err ) {
+		 	msg( err.code );
+		}
+		callback();
+	});
+}
 
 function promptForImport( callback ) {
 	msg('');
@@ -271,31 +265,6 @@ function promptForImport( callback ) {
 		callback();
 	})
 }
-
-// function importDB( callback ) {
-// 	process.chdir( '/vagrant' );
-
-// 	var gunzip = zlib.createGunzip();
-
-// 	r = fse.createReadStream('america.gov.sql.gz');
-// 	w = fse.createWriteStream( 'america.gov.sql' );
-
-// 	// uncompresses
-// 	r.pipe( gunzip )  
-// 	 .pipe( w );  
-
-// 	 // may need to drop wordpress db and recreate it before importing dump		
-	
-// 	// import
-// 	child = exec('mysql -u wordpress -p  wordpress < america.gov.sql', function ( err, stdout, stderr ) {
-// 		//msg( 'stdout: ' + stdout );
-// 	    msg( 'stderr: ' + stderr );
-// 		if( err ) {
-// 		 	msg( err.code );
-// 		}
-// 		callback();
-// 	});
-// }
 
 
 
