@@ -31,7 +31,7 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,  
-	networkEnableYaliTheme,
+	// networkEnableYaliTheme,
 	// addYaliSite,
 	// activateYaliThemeForSite,
 	enableEnviromentalVars,

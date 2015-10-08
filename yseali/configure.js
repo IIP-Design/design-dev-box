@@ -17,8 +17,8 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	activateMoxie,
-	verifyMoxie,
+	// activateMoxie,
+	// verifyMoxie,
 	createSalts,
 	copyEnvvar,
 	apacheRestart,
@@ -30,11 +30,12 @@ tasks = [
 	editConfig3,
 	replaceHtAccess,
 	promptToTest2,
-	// editconfig4,
+	editconfig4,
 	// networkEnableMoxieTheme,
 	// addYsealiSite,
 	// activateBaseThemeYseali,
-	// promptForImport
+	enableEnviromentalVars,
+	promptForImport
 ]
 
 // Runs on load
@@ -60,7 +61,7 @@ function activateMoxie ( callback ) {
 
 	process.chdir( 'www/wp' );
 
-	child = exec('/usr/local/bin/wp theme activate Moxie', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate parallelus-moxie', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
@@ -261,7 +262,7 @@ function activateBaseThemeYseali( callback ) {
 function promptForImport( callback ) {
 	msg('');
 	prompt.start();
-	prompt.get(["Next, you will need to import the america.gov database.\n 1.Copy the  yseali.state.sql script to the vagrant directory.\n 2. Run sh db.sh using 'wordpress' as the password'. Hit enter after the import to continue..."], function() {
+	prompt.get(["Next, you will need to import and configure the yseali.gov database."], function() {
 		callback();
 	})
 }
