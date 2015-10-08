@@ -17,8 +17,8 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	activateMoxie,
-	verifyMoxie,
+	//activateMoxie,
+	//verifyMoxie,
 	createSalts,
 	copyEnvvar,
 	apacheRestart,
@@ -29,11 +29,11 @@ tasks = [
 	convertToMultisite,
 	editConfig3,
 	replaceHtAccess,
-	promptToTest2
-	editconfig4,  // domain mapping
+	promptToTest2,
+	editconfig4,  
 	networkEnableYaliTheme,
 	// addYaliSite,
-	activateYaliThemeForSite,
+	// activateYaliThemeForSite,
 	enableEnviromentalVars,
 	promptForImport
 ]
@@ -61,7 +61,7 @@ function activateMoxie ( callback ) {
 
 	process.chdir( 'www/wp' );
 
-	child = exec('/usr/local/bin/wp theme activate Moxie', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate parallelus-moxie', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
@@ -272,7 +272,7 @@ function enableEnviromentalVars( callback ) {
 function promptForImport( callback ) {
 	msg('');
 	prompt.start();
-	prompt.get(["Next, you will need to import the yali.state.gov database.\n 1.Copy the  yali.state.gov.sql script to the vagrant directory.\n 2. Run sh db.sh using 'wordpress' as the password'. Hit enter after the import to continue..."], function() {
+	prompt.get(["Next, you will need to import and configure the the yali.state.gov database..."], function() {
 		callback();
 	})
 }
