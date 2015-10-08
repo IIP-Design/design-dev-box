@@ -25,7 +25,7 @@ sync_folder: 'www'
 #
 version: latest
 lang: en_US
-title: Yseali Multisite
+title: Yali Multisite
 multisite: false
 rewrite_structure: /archives/%post_id%
 
@@ -68,7 +68,7 @@ theme: ''
 # WordPress Options
 #
 options:
-  blogdescription: Another Yseali site
+  blogdescription: Another yali site
 
 #
 # The values of wp-config.php

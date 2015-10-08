@@ -14,18 +14,18 @@
  * @package WordPress
  */
 
-// ** MySQL settings ** //
+// ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'wordpress');
+define('DB_NAME', getenv('OPENSHIFT_APP_NAME'));
 
 /** MySQL database username */
-define('DB_USER', 'wordpress');
+define('DB_USER', getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
 
 /** MySQL database password */
-define('DB_PASSWORD', 'wordpress');
+define('DB_PASSWORD', getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST') . ':' . getenv('OPENSHIFT_MYSQL_DB_PORT'));
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -33,14 +33,26 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-define('AUTH_KEY',         'UWm+v<K4H0W/P=T!C3M_L5jcElpx*2k3R=pA/6${dC#+YaCWi/6chy0|XC7Mwb,o');
-define('SECURE_AUTH_KEY',  'ovNeXWDG>DMbUR#f7Zwu }b@f-w.ky>%<wByKH%+|LV=e~MIom<k`-<x].[lA}Tb');
-define('LOGGED_IN_KEY',    '?H8OFW+B=HF>Ob~hJ[v.dZ,[TLtsw+oPKie~o~Vm-?u)e):e%tlhm97%_4%|P/D#');
-define('NONCE_KEY',        'T%jD>e<aqt`-/>%gyvZ*[Q2NLFG8;K;+*XonE]hhD}:I:x+S?`=U%d+c1Y9VRRvq');
-define('AUTH_SALT',        '@eXz,m&-{yZ3%=_e*0c82~Ap>Wd(2m3&N3[$3<4*R3&E/aGRkinN>{dj<D?uKs7p');
-define('SECURE_AUTH_SALT', '&+#7MWf|0YD[O,NmEav]|}/-<u/wB#$YHZe#9|$XJmv=m2AP%ym/8b9sy7,YB!,9');
-define('LOGGED_IN_SALT',   '4+3;ZLjsT1(yOS;%RMOa<k]pBpoV8c5*%0v%J*w%SPuI7`/sF`D95|)4u+v4G%lq');
-define('NONCE_SALT',       '&j%t|3t+B#5wv-O%qfj2)=?a!M8fse$+mq8FKyrSLFX9~Acgb-GL;JJC)yYyM2Y}');
+/**#@+
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define('AUTH_KEY',         getenv('AUTH_KEY'));
+define('SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY'));
+define('NONCE_KEY',        getenv('NONCE_KEY'));
+define('AUTH_SALT',        getenv('AUTH_SALT'));
+define('SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
+define('NONCE_SALT',       getenv('NONCE_SALT'));
+
+/**#@-*/
+
 /**
  * WordPress Database Table prefix.
  *
@@ -78,18 +90,19 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PRO
 }
 
 /* Multisite */
-define( 'WP_ALLOW_MULTISITE', true);
+define( 'WP_ALLOW_MULTISITE', true); // check wp-site
 
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', true);
-define('DOMAIN_CURRENT_SITE', 'america.dev');
+define('DOMAIN_CURRENT_SITE', getenv('OPENSHIFT_APP_DNS')); //'state.dev' 
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 
-define('WP_DEFAULT_THEME', 'genesis');
+define('WP_DEFAULT_THEME', 'parrellus-moxie');
 
-//define('SUNRISE', 'on'); // wordpress-mu-domain-mapping activation  */
+define('SUNRISE', 'on'); // wordpress-mu-domain-mapping activation*/
+
 
 /* That's all, stop editing! Happy blogging. */
 

@@ -68,7 +68,7 @@ theme: ''
 # WordPress Options
 #
 options:
-  blogdescription: Another Yali site
+  blogdescription: Another yali site
 
 #
 # The values of wp-config.php

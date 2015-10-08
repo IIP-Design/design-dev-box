@@ -17,8 +17,8 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	// activateMoxie,
-	// verifyMoxie,
+	activateMoxie,
+	verifyMoxie,
 	createSalts,
 	copyEnvvar,
 	apacheRestart,
@@ -26,16 +26,16 @@ tasks = [
 	editConfig1,
 	promptToTest,
 	editConfig2,
-	// convertToMultisite,
-	// editConfig3,
-	// replaceHtAccess,
-	// promptToTest2
-	// editconfig4,  // domain mapping
-	// networkEnableYaliTheme,
+	convertToMultisite,
+	editConfig3,
+	replaceHtAccess,
+	promptToTest2
+	editconfig4,  // domain mapping
+	networkEnableYaliTheme,
 	// addYaliSite,
-	// activateYaliThemeForSite
-	// promptForImport
-	// importDB
+	activateYaliThemeForSite,
+	enableEnviromentalVars,
+	promptForImport
 ]
 
 // Runs on load
@@ -257,6 +257,14 @@ function activateYaliThemeForSite( callback ) {
 		 	msg( err.code );
 		}
 		callback();
+	});
+}
+
+function enableEnviromentalVars( callback ) {
+	msg('Enabling enviromental variables...');
+	
+	fse.copy( 'templates/wp-config.tpl-6.php', 'www/wp-config.php', function ( err ) {
+  		callback();
 	});
 }
 

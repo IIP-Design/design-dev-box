@@ -33,8 +33,8 @@ tasks = [
 	editconfig4,
 	activateExtender,
 	enableBaseTheme,
+	enableEnviromentalVars,
 	promptForImport
-	// importDB
 ]
 
 /*
@@ -50,7 +50,9 @@ async.waterfall( tasks, function ( err, result ) {
     	
     	msg( 'Uh oh, something went wrong...  ');
     }
-    msg("The installation is complete. Log into https://climate.america.dev/wp-admin/ and complete configuration by:\n 1. Add the 'admin'  user to each site (Network Admin -> Sites -> [site name] -> Edit -> Users)\n  2. Import the theme settings for each site (Site -> Genesis -> Import/Export\n 3. Manually update site by comparing against the live site and making any needed adjustments in WordPress dashboard.");
+    msg('');
+    msg("The installation is complete.");
+    msg( "Log into https://america.dev/wp-admin/ and complete configuration by:\n1. Add the 'admin'  user to each site (Network Admin -> Sites -> [site name] -> Edit -> Users)\n2. Import the theme settings for each site (Site -> Genesis -> Import/Export\n3. Manually update site by comparing against the live site and making any needed adjustments in WordPress dashboard.");
 });
 
 function whereAmI() {
@@ -69,7 +71,7 @@ function activateGenesis ( callback ) {
 
 	child = exec('/usr/local/bin/wp theme activate Genesis', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
+	    //msg( 'stderr: ' + stderr );
 		if( err ) {
 		 	msg( err.code );
 		}
@@ -146,7 +148,7 @@ function moveConfig( callback ) {
 
 	process.chdir( '/vagrant' );
 	
-	fse.move( 'wp-config.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'wp-config.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -154,7 +156,7 @@ function moveConfig( callback ) {
 function editConfig1( callback ) {
 	msg('Editing config...');
 	
-	fse.move( 'templates/wp-config.tpl-2.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'templates/wp-config.tpl-2.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -169,7 +171,7 @@ function promptToTest( callback ) {
 function editConfig2( callback ) {
 	msg('Allowing multisite...');
 	
-	fse.move( 'templates/wp-config.tpl-3.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'templates/wp-config.tpl-3.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -181,7 +183,7 @@ function convertToMultisite ( callback ) {
 
 	child = exec('/usr/local/bin/wp core multisite-convert --subdomains', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
+	    // msg( 'stderr: ' + stderr );
 		if( err ) {
 		 	msg( err.code );
 		}
@@ -194,7 +196,7 @@ function editConfig3( callback ) {
 
 	process.chdir( '/vagrant' );
 	
-	fse.move( 'templates/wp-config.tpl-4.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'templates/wp-config.tpl-4.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -217,7 +219,7 @@ function promptToTest2( callback ) {
 function editconfig4( callback ) {
 	msg('Enabling domain mapping...');
 	
-	fse.move( 'templates/wp-config.tpl-5.php', 'www/wp-config.php', function ( err ) {
+	fse.copy( 'templates/wp-config.tpl-5.php', 'www/wp-config.php', function ( err ) {
   		callback();
 	});
 }
@@ -229,7 +231,7 @@ function activateExtender( callback ) {
 
 	child = exec('/usr/local/bin/wp plugin activate america-theme-extender --network', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
+	   // msg( 'stderr: ' + stderr );
 		if( err ) {
 		 	msg( err.code );
 		}
@@ -242,13 +244,22 @@ function enableBaseTheme( callback ) {
 
 	child = exec('/usr/local/bin/wp theme enable america --network', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
-	    msg( 'stderr: ' + stderr );
+	   // msg( 'stderr: ' + stderr );
 		if( err ) {
 		 	msg( err.code );
 		}
 		callback();
 	});
 }
+
+function enableEnviromentalVars( callback ) {
+	msg('Enabling enviromental variables...');
+	
+	fse.copy( 'templates/wp-config.tpl-6.php', 'www/wp-config.php', function ( err ) {
+  		callback();
+	});
+}
+
 
 function promptForImport( callback ) {
 	msg('');
