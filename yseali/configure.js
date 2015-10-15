@@ -75,7 +75,7 @@ function verifyMoxie( callback ) {
 	msg( 'Verifying Moxie activations...' );
 	msg('');
 	prompt.start();
-	prompt.get(['Complete the following:\n1. Login to site at  http://state.dev/wp/wp-admin/\n2. Update database as prompted.\n3. Hit continue and login with username: admin and password: admin.\n4. Visit frontend and ensure all is working.\n5. Hit enter to continue...'], function() {
+	prompt.get(['Complete the following:\n1. Login to site at  http://iip.dev/wp/wp-admin/\n2. Update database as prompted.\n3. Hit continue and login with username: admin and password: admin.\n4. Visit frontend and ensure all is working.\n5. Hit enter to continue...'], function() {
 		callback();
 	})
 }
@@ -155,7 +155,7 @@ function editConfig1( callback ) {
 
 function promptToTest( callback ) {
 	prompt.start();
-	prompt.get(['Confirm that you can still connect to the DB by:\n 1. Go to http://yseali.state.dev to verify frontend loads\n 2. Confirm that you can login to http://yseali.state.dev/wp/wp-login.php.\n 3. If login successful, hit enter to continue..'], function() {
+	prompt.get(['Confirm that you can still connect to the DB by:\n 1. Go to http://yseali.iip.dev to verify frontend loads\n 2. Confirm that you can login to http://yseali.iip.dev/wp/wp-login.php.\n 3. If login successful, hit enter to continue..'], function() {
 		callback();
 	});
 }
@@ -203,7 +203,7 @@ function replaceHtAccess( callback ) {
 
 function promptToTest2( callback ) {
 	prompt.start();
-	prompt.get(['Make sure you can still access the http://yseali.state.dev, and that you can login: http://yseali.state.dev/wp/wp-admin/.\nHit Enter to continue...'], function() {
+	prompt.get(['Make sure you can still access the http://yseali.iip.dev, and that you can login: http://yseali.iip.dev/wp/wp-admin/.\nHit Enter to continue...'], function() {
 		callback();
 	});
 }
@@ -249,7 +249,7 @@ function activateBaseThemeYseali( callback ) {
 	
 	msg('Activating yseali base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=yseali.state.dev', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate america --url=yseali.iip.dev', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
