@@ -249,13 +249,21 @@ function activateBaseThemeYseali( callback ) {
 	
 	msg('Activating yseali base theme for sites...');
 	
-	child = exec('/usr/local/bin/wp theme activate america --url=yseali.iip.dev', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate yseali-moxie-child-theme --url=yseali.iip.dev', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
 		 	msg( err.code );
 		}
 		callback();
+	});
+}
+
+function enableEnviromentalVars( callback ) {
+	msg('Enabling enviromental variables...');
+	
+	fse.copy( 'templates/wp-config.tpl-6.php', 'www/wp-config.php', function ( err ) {
+  		callback();
 	});
 }
 
