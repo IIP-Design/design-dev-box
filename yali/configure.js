@@ -17,8 +17,8 @@ function msg( msg ) {
 
 tasks = [
 	verifyConnection,
-	//activateMoxie,
-	//verifyMoxie,
+	activateMoxie,
+	verifyMoxie,
 	createSalts,
 	copyEnvvar,
 	apacheRestart,
@@ -31,7 +31,7 @@ tasks = [
 	replaceHtAccess,
 	promptToTest2,
 	editconfig4,  
-	// networkEnableYaliTheme,
+	networkEnableYaliTheme,
 	// addYaliSite,
 	// activateYaliThemeForSite,
 	enableEnviromentalVars,
@@ -250,7 +250,7 @@ function activateYaliThemeForSite( callback ) {
 	
 	msg('Activating theme for yali site...');
 	
-	child = exec('/usr/local/bin/wp theme activate yali-moxie-child-theme --url=yali.state.dev', function ( err, stdout, stderr ) {
+	child = exec('/usr/local/bin/wp theme activate moxie-yali --url=yali.state.dev', function ( err, stdout, stderr ) {
 		msg( 'stdout: ' + stdout );
 	    msg( 'stderr: ' + stderr );
 		if( err ) {
