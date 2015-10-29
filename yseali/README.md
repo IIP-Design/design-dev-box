@@ -22,7 +22,7 @@ design.dev  192.168.33.44
 ```
 $ git clone git@github.com:USStateDept/design-dev-box.git design-dev-boxes
 ```
-2. Go to america directory: `cd yseali`
+2. Go to yseali directory: `cd yseali`
 3. Run npm install: `npm install`
 4. Run node install.js: `node install.js`
 5. Follow the instruction' in the script
