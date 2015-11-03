@@ -24,4 +24,5 @@ america/wp-config.php
 yali/wp-config.php
 yseali/wp-config.
 
+keys/
 *.sql
