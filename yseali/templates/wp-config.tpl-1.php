@@ -49,7 +49,7 @@ $table_prefix = 'wp_';
 define( 'WP_HOME', 'http://iip.dev' );
 define( 'WP_SITEURL', 'http://iip.dev/wp' );
 define( 'JETPACK_DEV_DEBUG', true );
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', false );
 define( 'FORCE_SSL_ADMIN', true );
 define( 'SAVEQUERIES', false );
 
