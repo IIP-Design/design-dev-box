@@ -211,7 +211,7 @@ function replaceHtAccess( callback ) {
 
 function promptToTest2( callback ) {
 	prompt.start();
-	prompt.get(['Make sure you can still access the http://america.dev, and that you can login: http://america.dev/wp/wp-admin/.\nHit Enter to continue...'], function() {
+	prompt.get(['Make sure you can still access the http://america.dev, and that you can login: http://america.dev/wp/wp-admin/.\nIf you cannnot connect, try again after the db is imported.\nHit Enter to continue...'], function() {
 		callback();
 	});
 }
