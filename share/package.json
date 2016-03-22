@@ -1,0 +1,19 @@
+{
+  "name": "enviroment",
+  "version": "1.0.0",
+  "description": "Installs and configures the Share development enviroment",
+  "main": "install.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Office of Design",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.2",
+    "fs-extra": "^0.24.0",
+    "prompt": "^0.2.14",
+    "replacestream": "^4.0.0",
+    "simple-git": "^1.8.0",
+    "randomstring": "^1.1.0"
+  }
+}
