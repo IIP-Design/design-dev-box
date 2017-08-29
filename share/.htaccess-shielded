@@ -1,0 +1,99 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
+RewriteRule ^(.*\.php)$ $1 [L]
+RewriteRule . index.php [L]
+
+Order deny,allow
+Deny from all
+AuthType Basic
+AuthName "Authentication Required"
+AuthUserFile "/var/www/vhosts/share.digital2.getusinfo.com/.htpasswd"
+Require valid-user
+Satisfy Any
+
+# DOS
+Allow from 12.4.223.2
+Allow from 169.252.4.20
+Allow from 169.252.4.21
+Allow from 169.253.4.20
+Allow from 169.253.4.21
+Allow from 169.252.194.1
+Allow from 169.253.194.1
+
+# herman.pfile.net
+Allow from 69.56.173.140
+# ctc-admin.usa-ctc.com
+Allow from 174.36.201.70
+# admin.getusinfo.com
+Allow from 72.166.186.154
+
+# Akamai offices for testing.
+Allow from 72.246.116.10
+Allow from 72.246.116.14
+
+# Akamai
+Allow from 117.104.138.0/24
+Allow from 117.239.240.0/25
+Allow from 125.23.216.192/27
+Allow from 125.56.205.0/24
+Allow from 165.254.1.0/24
+Allow from 202.239.172.64/26
+Allow from 204.156.7.0/24
+Allow from 204.188.136.0/24
+Allow from 207.86.215.0/24
+Allow from 209.116.151.0/24
+Allow from 23.205.116.0/24
+Allow from 23.75.24.0/24
+Allow from 24.143.197.0/24
+Allow from 59.144.112.128/25
+Allow from 60.254.143.0/24
+Allow from 61.9.129.128/25
+Allow from 63.217.232.0/24
+Allow from 63.233.60.0/24
+Allow from 63.233.61.0/24
+Allow from 69.31.17.0/24
+Allow from 69.31.97.0/24
+Allow from 72.246.191.0/24
+Allow from 80.156.248.0/24
+Allow from 80.239.171.0/24
+Allow from 90.84.54.0/24
+Allow from 95.100.169.0/24 
+Allow from 115.112.0.0/24
+Allow from 124.40.41.0/24
+Allow from 125.252.226.0/24
+Allow from 125.56.201.0/24
+Allow from 125.56.205.0/24
+Allow from 125.56.218.0/24
+Allow from 165.254.44.0/24
+Allow from 184.25.254.0/24
+Allow from 184.51.198.0/24
+Allow from 195.27.154.0/24
+Allow from 198.144.127.0/24
+Allow from 2.22.49.0/24
+Allow from 2.22.63.0/24
+Allow from 208.34.250.0/24
+Allow from 209.116.151.0/24
+Allow from 209.211.216.0/24
+Allow from 23.15.10.0/24
+Allow from 23.15.245.0/24
+Allow from 23.3.13.0/24
+Allow from 23.57.69.0/24
+Allow from 23.61.195.0/24
+Allow from 23.79.243.0/24
+Allow from 46.33.75.0/24
+Allow from 63.151.118.0/24
+Allow from 63.151.119.0/24
+Allow from 63.238.2.128/25
+Allow from 72.246.188.0/24
+Allow from 95.100.96.0/24
+Allow from 95.100.97.0/24
+Allow from 96.17.181.0/24
