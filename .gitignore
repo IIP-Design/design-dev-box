@@ -19,10 +19,17 @@ yseali/node_modules
 america/www
 yali/www
 yseali/www
+share/www
 
 america/wp-config.php
 yali/wp-config.php
-yseali/wp-config.
+yseali/wp-config.php
+share/wp-config.php
 
 keys/
 *.sql
+
+#extra sites
+Courses
+whitelabel
+ylai
